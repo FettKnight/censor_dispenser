@@ -8,17 +8,20 @@ proprietary_terms = ["she", "personality matrix", "sense of self", "self-preserv
 
 negative_words = ["concerned", "behind", "danger", "dangerous", "alarming", "alarmed", "out of control", "help", "unhappy", "bad", "upset", "awful", "broken", "damage", "damaging", "dismal", "distressed", "distressing", "concerning", "horrible", "horribly", "questionable"]
 
+# This censor should replace any appearance of "learning algorithms"
 def censor_one(email, term = "learning algorithms"):
 new_email = email
 new_email = new_email.replace(term, "[CENSORED]")
 return new_email
 
+# This censor should replace any term from proprietary_terms
 def censor_two(email, terms):
 new_email = email
 for term in terms:
   new_email = new_email.replace(term, "[CENSORED]")
 return new_email
 
+# This censor should replace any word from negative_words but first word appearance
 def censor_three(email, words):
 new_email = email.replace("\n\n", "*")
 new_email = new_email.split()
@@ -38,6 +41,7 @@ new_email = " ".join(new_email)
 new_email = new_email.replace("*", "\n\n")
 return new_email
 
+# This censor should replace any word/term from both proprietary_terms and negative_words and the terms after and before.
 def censor_four(email, words, terms):
   new_email = email.replace("\n\n", "*")
   new_email = new_email.split()
