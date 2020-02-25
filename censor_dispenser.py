@@ -19,3 +19,21 @@ for term in terms:
   new_email = new_email.replace(term, "[CENSORED]")
 return new_email
 
+def censor_three(email, words):
+new_email = email.replace("\n\n", "*")
+new_email = new_email.split()
+new_email_lower = [i.lower() for i in new_email]
+first_word_index = len(new_email)
+temp_index = 0
+for word in words:
+  if word in new_email_lower:
+    temp_index = new_email_lower.index(word)
+    if temp_index < first_word_index:
+      first_word_index = temp_index
+for word in words:
+  if word in new_email_lower:
+    if new_email_lower.index(word) != first_word_index:
+      new_email[new_email_lower.index(word)] = "[CENSORED]"
+new_email = " ".join(new_email)
+new_email = new_email.replace("*", "\n\n")
+return new_email
