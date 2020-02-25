@@ -13,4 +13,9 @@ new_email = email
 new_email = new_email.replace(term, "[CENSORED]")
 return new_email
 
+def censor_two(email, terms):
+new_email = email
+for term in terms:
+  new_email = new_email.replace(term, "[CENSORED]")
+return new_email
 
