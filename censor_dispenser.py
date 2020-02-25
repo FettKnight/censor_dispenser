@@ -37,3 +37,26 @@ for word in words:
 new_email = " ".join(new_email)
 new_email = new_email.replace("*", "\n\n")
 return new_email
+
+def censor_four(email, words, terms):
+  new_email = email.replace("\n\n", "*")
+  new_email = new_email.split()
+  new_email_lower = [i.lower() for i in new_email]
+  for word in words:
+    if word in new_email_lower:
+      new_email[new_email_lower.index(word)] = "[CENSORED]"
+      new_email[new_email_lower.index(word) - 1] = "[CENSORED]"
+      new_email[new_email_lower.index(word) + 1] = "[CENSORED]"
+  for term in terms:
+    if term in new_email_lower:
+      new_email[new_email_lower.index(term)] = "[CENSORED]"
+      new_email[new_email_lower.index(term) - 1] = "[CENSORED]"
+      new_email[new_email_lower.index(term) + 1] = "[CENSORED]"
+  new_email = " ".join(new_email)
+  new_email = new_email.replace("*", "\n\n")
+  return new_email
+
+#print(censor_one(email_one))
+#print(censor_two(email_two, proprietary_terms))
+#print(censor_three(email_three, negative_words))
+#print(censor_four(email_four, negative_words, proprietary_terms))
